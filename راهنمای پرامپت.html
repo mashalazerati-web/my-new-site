@@ -1,0 +1,852 @@
+<!DOCTYPE html>
+<html lang="fa" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <title>راهنمای پرامپت‌های هوش مصنوعی — مدیریت شیفت پرستاری</title>
+    <style>
+        @page {
+            size: A4;
+            margin: 2cm;
+        }
+        
+        body {
+            font-family: 'B Nazanin', 'B Zar', 'Tahoma', sans-serif;
+            direction: rtl;
+            line-height: 1.9;
+            color: #2c3e50;
+            font-size: 12pt;
+            max-width: 21cm;
+            margin: 0 auto;
+            padding: 20px;
+        }
+        
+        h1 {
+            color: #1e40af;
+            font-size: 22pt;
+            text-align: center;
+            border-bottom: 4px solid #3b82f6;
+            padding-bottom: 15px;
+            margin-bottom: 30px;
+        }
+        
+        h2 {
+            color: #1e3a8a;
+            font-size: 16pt;
+            margin-top: 35px;
+            padding: 10px 15px;
+            background: linear-gradient(135deg, #dbeafe 0%, #e0e7ff 100%);
+            border-right: 6px solid #3b82f6;
+            border-radius: 6px;
+        }
+        
+        h3 {
+            color: #374151;
+            font-size: 14pt;
+            margin-top: 25px;
+            padding-right: 10px;
+            border-right: 3px solid #f59e0b;
+        }
+        
+        h4 {
+            color: #6b7280;
+            font-size: 12pt;
+            margin-top: 20px;
+        }
+        
+        .intro-box {
+            background: linear-gradient(135deg, #eff6ff 0%, #dbeafe 100%);
+            padding: 20px 25px;
+            border-radius: 10px;
+            border: 2px solid #93c5fd;
+            margin-bottom: 30px;
+        }
+        
+        .intro-box p {
+            margin: 8px 0;
+            font-size: 11pt;
+        }
+        
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 15px 0;
+            font-size: 11pt;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.05);
+        }
+        
+        th {
+            background: linear-gradient(135deg, #1e40af 0%, #1e3a8a 100%);
+            color: white;
+            padding: 12px 15px;
+            text-align: right;
+            font-weight: bold;
+            border: 1px solid #1e3a8a;
+        }
+        
+        td {
+            padding: 10px 15px;
+            border: 1px solid #cbd5e1;
+            vertical-align: top;
+        }
+        
+        tr:nth-child(even) {
+            background: #f8fafc;
+        }
+        
+        tr:hover {
+            background: #eff6ff;
+        }
+        
+        .prompt {
+            font-family: 'Consolas', 'Courier New', monospace;
+            background: #1e293b;
+            color: #4ade80;
+            padding: 12px 18px;
+            border-radius: 8px;
+            margin: 10px 0;
+            direction: rtl;
+            text-align: right;
+            font-size: 12pt;
+            border-left: 5px solid #22c55e;
+        }
+        
+        .prompt.valid {
+            border-left-color: #22c55e;
+        }
+        
+        .prompt.invalid {
+            background: #450a0a;
+            color: #fca5a5;
+            border-left-color: #ef4444;
+        }
+        
+        .result-box {
+            background: #f0fdf4;
+            border: 2px solid #86efac;
+            padding: 12px 18px;
+            border-radius: 8px;
+            margin: 10px 0;
+            font-size: 11pt;
+        }
+        
+        .result-box strong {
+            color: #15803d;
+        }
+        
+        .warning-box {
+            background: #fef3c7;
+            border: 2px solid #fcd34d;
+            padding: 15px 20px;
+            border-radius: 8px;
+            margin: 15px 0;
+        }
+        
+        .warning-box strong {
+            color: #92400e;
+            display: block;
+            margin-bottom: 8px;
+        }
+        
+        .success-box {
+            background: #d1fae5;
+            border: 2px solid #6ee7b7;
+            padding: 15px 20px;
+            border-radius: 8px;
+            margin: 15px 0;
+        }
+        
+        .badge {
+            display: inline-block;
+            padding: 3px 10px;
+            border-radius: 12px;
+            font-size: 10pt;
+            font-weight: bold;
+            margin-right: 8px;
+        }
+        
+        .badge-green {
+            background: #d1fae5;
+            color: #065f46;
+        }
+        
+        .badge-yellow {
+            background: #fef3c7;
+            color: #92400e;
+        }
+        
+        .badge-red {
+            background: #fee2e2;
+            color: #991b1b;
+        }
+        
+        .badge-blue {
+            background: #dbeafe;
+            color: #1e40af;
+        }
+        
+        .emoji-lg {
+            font-size: 20pt;
+            vertical-align: middle;
+        }
+        
+        .section-box {
+            background: #ffffff;
+            border: 2px solid #e2e8f0;
+            border-radius: 10px;
+            padding: 20px;
+            margin: 20px 0;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.04);
+        }
+        
+        .section-title {
+            font-size: 14pt;
+            font-weight: bold;
+            color: #1e40af;
+            margin-bottom: 15px;
+            padding-bottom: 10px;
+            border-bottom: 2px dashed #cbd5e1;
+        }
+        
+        ul, ol {
+            padding-right: 25px;
+            line-height: 2;
+        }
+        
+        li {
+            margin: 5px 0;
+        }
+        
+        code {
+            font-family: 'Consolas', 'Courier New', monospace;
+            background: #f1f5f9;
+            color: #be185d;
+            padding: 2px 8px;
+            border-radius: 4px;
+            font-size: 11pt;
+        }
+        
+        .toc {
+            background: #f8fafc;
+            border: 2px solid #cbd5e1;
+            border-radius: 10px;
+            padding: 20px 30px;
+            margin: 25px 0;
+        }
+        
+        .toc-title {
+            font-size: 14pt;
+            font-weight: bold;
+            color: #1e40af;
+            margin-bottom: 15px;
+        }
+        
+        .toc ol {
+            list-style-type: none;
+            padding-right: 0;
+        }
+        
+        .toc li {
+            padding: 5px 0;
+            border-bottom: 1px dotted #cbd5e1;
+        }
+        
+        .toc li:last-child {
+            border-bottom: none;
+        }
+        
+        .footer {
+            margin-top: 50px;
+            padding-top: 20px;
+            border-top: 3px double #cbd5e1;
+            text-align: center;
+            font-size: 10pt;
+            color: #6b7280;
+        }
+        
+        .example-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 15px;
+            margin: 15px 0;
+        }
+        
+        .example-card {
+            background: #f8fafc;
+            border: 1px solid #e2e8f0;
+            border-radius: 8px;
+            padding: 15px;
+        }
+        
+        .example-card.valid {
+            border-color: #86efac;
+            background: #f0fdf4;
+        }
+        
+        .example-card.invalid {
+            border-color: #fca5a5;
+            background: #fef2f2;
+        }
+        
+        .example-card .label {
+            font-weight: bold;
+            font-size: 10pt;
+            margin-bottom: 8px;
+        }
+        
+        .example-card.valid .label {
+            color: #15803d;
+        }
+        
+        .example-card.invalid .label {
+            color: #991b1b;
+        }
+        
+        .big-number {
+            display: inline-block;
+            width: 28px;
+            height: 28px;
+            background: #3b82f6;
+            color: white;
+            border-radius: 50%;
+            text-align: center;
+            line-height: 28px;
+            font-weight: bold;
+            font-size: 11pt;
+            margin-left: 8px;
+        }
+    </style>
+</head>
+<body>
+
+<h1>
+    🤖 راهنمای پرامپت‌های هوش مصنوعی<br>
+    <span style="font-size: 14pt; color: #6b7280;">سیستم مدیریت شیفت پرستاری</span>
+</h1>
+
+<div class="intro-box">
+    <p><strong>📌 این راهنما برای چیست؟</strong></p>
+    <p>این سند، تمام پرامپت‌های قابل شناسایی توسط سیستم هوش مصنوعی را به همراه مثال‌های واقعی و توضیحات کامل نمایش می‌دهد.</p>
+    <p>با استفاده از این راهنما می‌توانید:</p>
+    <ul>
+        <li>پرامپت‌های معتبر بنویسید</li>
+        <li>از اشتباهات رایج جلوگیری کنید</li>
+        <li>نتایج دقیق‌تری بگیرید</li>
+    </ul>
+</div>
+
+<div class="toc">
+    <div class="toc-title">📋 فهرست مطالب</div>
+    <ol>
+        <li><strong>۱.</strong> اصول کلی نوشتن پرامپت</li>
+        <li><strong>۲.</strong> الگوهای قابل شناسایی (۱۰ الگو)</li>
+        <li><strong>۳.</strong> مثال‌های آماده برای هر بخش</li>
+        <li><strong>۴.</strong> اشتباهات رایج و راه‌حل</li>
+        <li><strong>۵.</strong> پرامپت‌های ترکیبی</li>
+        <li><strong>۶.</strong> راهنمای سریع</li>
+    </ol>
+</div>
+
+<!-- ============================================== -->
+<h2>۱. اصول کلی نوشتن پرامپت</h2>
+
+<div class="section-box">
+    <div class="section-title">🎯 قوانین طلایی</div>
+    
+    <table>
+        <thead>
+            <tr>
+                <th style="width: 40px;">#</th>
+                <th style="width: 150px;">قانون</th>
+                <th>توضیح</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <td><span class="big-number">۱</span></td>
+                <td><strong>نام دقیق</strong></td>
+                <td>همیشه از نام و نام‌خانوادگی کامل استفاده کنید: <code>علی علوی</code> نه فقط <code>علوی</code></td>
+            </tr>
+            <tr>
+                <td><span class="big-number">۲</span></td>
+                <td><strong>ترتیب صحیح</strong></td>
+                <td>ترتیب: <strong>نام + بازه (اختیاری) + شیفت + فعل</strong></td>
+            </tr>
+            <tr>
+                <td><span class="big-number">۳</span></td>
+                <td><strong>فعل مناسب</strong></td>
+                <td>از افعال مجاز استفاده کنید: <code>باشد</code>، <code>کار کند</code>، <code>باشند</code></td>
+            </tr>
+            <tr>
+                <td><span class="big-number">۴</span></td>
+                <td><strong>جداکننده صحیح</strong></td>
+                <td>برای چند پرستار: <code>و</code> یا ویرگول <code>،</code></td>
+            </tr>
+            <tr>
+                <td><span class="big-number">۵</span></td>
+                <td><strong>سادگی</strong></td>
+                <td>از جملات کوتاه و واضح استفاده کنید</td>
+            </tr>
+        </tbody>
+    </table>
+</div>
+
+<!-- ============================================== -->
+<h2>۲. الگوهای قابل شناسایی</h2>
+
+<!-- الگوی ۱ -->
+<div class="section-box">
+    <div class="section-title">
+        <span class="badge badge-green">الگوی ۱</span>
+        تک پرستار — ساده
+    </div>
+    
+    <p><strong>ساختار:</strong> <code>[نام کامل] [شیفت] [فعل]</code></p>
+    
+    <p><strong>شیفت‌های مجاز:</strong> صبح | عصر | شب</p>
+    <p><strong>افعال مجاز:</strong> باشد | کار کند | بگذارید</p>
+    
+    <h4>✅ مثال‌های معتبر:</h4>
+    <div class="prompt valid">علی علوی صبح باشد</div>
+    <div class="prompt valid">فاطمه قوامی عصر باشد</div>
+    <div class="prompt valid">مرضیه ابراهیمی شب کار کند</div>
+    <div class="prompt valid">حسین سلمانی صبح بگذارید</div>
+    
+    <div class="result-box">
+        <strong>📊 نتیجه:</strong> یک قانون <code>preferred_shift_for_staff</code> با پرستار مشخص و شیفت مورد نظر ساخته می‌شود.
+    </div>
+</div>
+
+<!-- الگوی ۲ -->
+<div class="section-box">
+    <div class="section-title">
+        <span class="badge badge-green">الگوی ۲</span>
+        تک پرستار با بازه روز
+    </div>
+    
+    <p><strong>ساختار:</strong> <code>[نام] از روز X تا Y [شیفت] [فعل]</code></p>
+    
+    <h4>✅ مثال‌های معتبر:</h4>
+    <div class="prompt valid">علی علوی از روز 5 تا 10 صبح باشد</div>
+    <div class="prompt valid">فاطمه قوامی از روز 1 تا 15 عصر باشد</div>
+    <div class="prompt valid">مرضیه ابراهیمی از روز 20 تا 31 شب کار کند</div>
+    <div class="prompt valid">حسین سلمانی از روز 10 تا 20 صبح باشد</div>
+    
+    <div class="result-box">
+        <strong>📊 نتیجه:</strong> قانون فقط برای روزهای مشخص اعمال می‌شود.<br>
+        <strong>روزها:</strong> [5، 6، 7، 8، 9، 10]
+    </div>
+</div>
+
+<!-- الگوی ۳ -->
+<div class="section-box">
+    <div class="section-title">
+        <span class="badge badge-green">الگوی ۳</span>
+        چند پرستار با «و»
+    </div>
+    
+    <p><strong>ساختار:</strong> <code>[نام۱] و [نام۲] [شیفت] باشند</code></p>
+    
+    <h4>✅ مثال‌های معتبر:</h4>
+    <div class="prompt valid">علی علوی و فاطمه قوامی صبح باشند</div>
+    <div class="prompt valid">مرضیه ابراهیمی و محسن بخت پور شب باشند</div>
+    <div class="prompt valid">حسین سلمانی و فاطمه قوامی عصر کار کنند</div>
+    
+    <div class="result-box">
+        <strong>📊 نتیجه:</strong> برای هر پرستار یک قانون جداگانه ساخته می‌شود (۲ قانون).
+    </div>
+</div>
+
+<!-- الگوی ۴ -->
+<div class="section-box">
+    <div class="section-title">
+        <span class="badge badge-green">الگوی ۴</span>
+        چند پرستار با ویرگول و «و»
+    </div>
+    
+    <p><strong>ساختار:</strong> <code>[نام۱]، [نام۲] و [نام۳] [شیفت] باشند</code></p>
+    
+    <h4>✅ مثال‌های معتبر:</h4>
+    <div class="prompt valid">علی علوی، فاطمه قوامی و مرضیه ابراهیمی صبح باشند</div>
+    <div class="prompt valid">مرضیه ابراهیمی، محسن بخت پور و حسین سلمانی شب باشند</div>
+    
+    <div class="result-box">
+        <strong>📊 نتیجه:</strong> برای هر پرستار یک قانون جداگانه (۳ قانون).
+    </div>
+</div>
+
+<!-- الگوی ۵ -->
+<div class="section-box">
+    <div class="section-title">
+        <span class="badge badge-green">الگوی ۵</span>
+        همه پرستاران
+    </div>
+    
+    <p><strong>ساختار:</strong> <code>همه [شیفت] باشند</code></p>
+    
+    <h4>✅ مثال‌های معتبر:</h4>
+    <div class="prompt valid">همه صبح باشند</div>
+    <div class="prompt valid">همه شب باشند</div>
+    <div class="prompt valid">همه عصر کار کنند</div>
+    <div class="prompt valid">تمام کارکنان شب باشند</div>
+    
+    <div class="result-box">
+        <strong>📊 نتیجه:</strong> برای همه پرسنل بخش، یک قانون ساخته می‌شود.
+    </div>
+</div>
+
+<!-- الگوی ۶ -->
+<div class="section-box">
+    <div class="section-title">
+        <span class="badge badge-yellow">الگوی ۶</span>
+        همه به جز یک نفر
+    </div>
+    
+    <p><strong>ساختار:</strong> <code>همه [شیفت] باشند به جز [نام]</code></p>
+    
+    <h4>✅ مثال‌های معتبر:</h4>
+    <div class="prompt valid">همه صبح باشند به جز علی علوی</div>
+    <div class="prompt valid">همه شب کار کنند به جز فاطمه قوامی</div>
+    <div class="prompt valid">همه عصر باشند به جز مرضیه ابراهیمی</div>
+    
+    <div class="result-box">
+        <strong>📊 نتیجه:</strong> برای همه پرسنل به جز فرد مشخص‌شده، قانون ساخته می‌شود.
+    </div>
+</div>
+
+<!-- الگوی ۷ -->
+<div class="section-box">
+    <div class="section-title">
+        <span class="badge badge-blue">الگوی ۷</span>
+        مرخصی / آف
+    </div>
+    
+    <p><strong>ساختار:</strong> <code>[نام] از روز X تا Y مرخصی است</code></p>
+    
+    <p><strong>کلیدواژه‌های مرخصی:</strong> مرخصی | آف | در دسترس نباشد | استراحت</p>
+    
+    <h4>✅ مثال‌های معتبر:</h4>
+    <div class="prompt valid">علی علوی از روز 5 تا 10 مرخصی است</div>
+    <div class="prompt valid">فاطمه قوامی از روز 1 تا 7 آف باشد</div>
+    <div class="prompt valid">مرضیه ابراهیمی از روز 20 تا 25 مرخصی است</div>
+    
+    <div class="result-box">
+        <strong>📊 نتیجه:</strong> برای روزهای مشخص، شیفت <code>-</code> (آف) ثبت می‌شود.
+    </div>
+</div>
+
+<!-- الگوی ۸ -->
+<div class="section-box">
+    <div class="section-title">
+        <span class="badge badge-yellow">الگوی ۸</span>
+        حداکثر شب متوالی
+    </div>
+    
+    <p><strong>ساختار:</strong> <code>حداکثر X شب متوالی</code></p>
+    
+    <h4>✅ مثال‌های معتبر:</h4>
+    <div class="prompt valid">حداکثر 2 شب متوالی</div>
+    <div class="prompt valid">حداکثر 3 شب متوالی</div>
+    <div class="prompt valid">حداکثر 1 شب متوالی</div>
+    
+    <div class="result-box">
+        <strong>📊 نتیجه:</strong> قانون سخت (Hard) که مطمئن می‌شود هیچ پرستاری بیش از X شب متوالی کار نکند.
+    </div>
+</div>
+
+<!-- الگوی ۹ -->
+<div class="section-box">
+    <div class="section-title">
+        <span class="badge badge-yellow">الگوی ۹</span>
+        حداقل شیفت در ماه
+    </div>
+    
+    <p><strong>ساختار:</strong> <code>حداقل X شیفت</code></p>
+    
+    <h4>✅ مثال‌های معتبر:</h4>
+    <div class="prompt valid">حداقل 20 شیفت</div>
+    <div class="prompt valid">حداقل 15 شیفت</div>
+    <div class="prompt valid">حداقل 25 شیفت</div>
+    
+    <div class="result-box">
+        <strong>📊 نتیجه:</strong> قانون توزیع عادلانه با حداقل شیفت مشخص.
+    </div>
+</div>
+
+<!-- الگوی ۱۰ -->
+<div class="section-box">
+    <div class="section-title">
+        <span class="badge badge-yellow">الگوی ۱۰</span>
+        حداکثر شیفت در ماه
+    </div>
+    
+    <p><strong>ساختار:</strong> <code>حداکثر X شیفت</code></p>
+    
+    <h4>✅ مثال‌های معتبر:</h4>
+    <div class="prompt valid">حداکثر 45 شیفت</div>
+    <div class="prompt valid">حداکثر 40 شیفت</div>
+    
+    <div class="result-box">
+        <strong>📊 نتیجه:</strong> قانون توزیع عادلانه با حداکثر شیفت مشخص.
+    </div>
+</div>
+
+<!-- ============================================== -->
+<h2>۳. مثال‌های آماده برای هر بخش</h2>
+
+<div class="section-box">
+    <div class="section-title">🏥 بخش SCU (نمونه)</div>
+    
+    <p><strong>پرسنل فرضی:</strong></p>
+    <ul>
+        <li>علی علوی</li>
+        <li>مرضیه ابراهیمی</li>
+        <li>محسن بخت پور</li>
+        <li>فاطمه قوامی</li>
+        <li>حسین سلمانی</li>
+    </ul>
+    
+    <h4>📝 ۱۰ پرامپت آماده:</h4>
+    
+    <table>
+        <thead>
+            <tr>
+                <th style="width: 40px;">#</th>
+                <th>پرامپت</th>
+                <th style="width: 200px;">کاربرد</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <td>۱</td>
+                <td><code>علی علوی صبح باشد</code></td>
+                <td>ترجیح یک پرستار</td>
+            </tr>
+            <tr>
+                <td>۲</td>
+                <td><code>علی علوی و فاطمه قوامی صبح باشند</code></td>
+                <td>ترجیح چند پرستار</td>
+            </tr>
+            <tr>
+                <td>۳</td>
+                <td><code>مرضیه ابراهیمی از روز 5 تا 10 شب باشد</code></td>
+                <td>بازه خاص</td>
+            </tr>
+            <tr>
+                <td>۴</td>
+                <td><code>حسین سلمانی از روز 15 تا 20 مرخصی است</code></td>
+                <td>مرخصی</td>
+            </tr>
+            <tr>
+                <td>۵</td>
+                <td><code>همه صبح باشند</code></td>
+                <td>اعمال کلی</td>
+            </tr>
+            <tr>
+                <td>۶</td>
+                <td><code>همه شب باشند به جز علی علوی</code></td>
+                <td>استثنا</td>
+            </tr>
+            <tr>
+                <td>۷</td>
+                <td><code>حداکثر 2 شب متوالی، حداقل 25 شیفت</code></td>
+                <td>محدودیت‌ها</td>
+            </tr>
+            <tr>
+                <td>۸</td>
+                <td><code>علی علوی صبح باشد، فاطمه قوامی شب باشد</code></td>
+                <td>ترکیبی کوتاه</td>
+            </tr>
+            <tr>
+                <td>۹</td>
+                <td><code>علی علوی از روز 1 تا 15 صبح باشد، فاطمه قوامی از روز 16 تا 31 شب باشد</code></td>
+                <td>ترکیبی متوسط</td>
+            </tr>
+            <tr>
+                <td>۱۰</td>
+                <td><code>علی علوی صبح باشد، مرضیه ابراهیمی و فاطمه قوامی عصر باشند، حسین سلمانی شب باشد، حداکثر 2 شب متوالی</code></td>
+                <td>ترکیبی کامل</td>
+            </tr>
+        </tbody>
+    </table>
+</div>
+
+<!-- ============================================== -->
+<h2>۴. اشتباهات رایج و راه‌حل</h2>
+
+<div class="warning-box">
+    <strong>⚠️ این اشتباهات باعث می‌شوند پیام "قابل تفسیر نبود" بگیرید:</strong>
+</div>
+
+<table>
+    <thead>
+        <tr>
+            <th style="width: 50px;">#</th>
+            <th style="width: 40%;">❌ اشتباه</th>
+            <th style="width: 40%;">✅ صحیح</th>
+            <th>دلیل</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr>
+            <td>۱</td>
+            <td><code>علوی صبح باشد</code></td>
+            <td><code>علی علوی صبح باشد</code></td>
+            <td>نام خانوادگی تنها کافی نیست</td>
+        </tr>
+        <tr>
+            <td>۲</td>
+            <td><code>صبح باشد علی علوی</code></td>
+            <td><code>علی علوی صبح باشد</code></td>
+            <td>ترتیب کلمات مهم است</td>
+        </tr>
+        <tr>
+            <td>۳</td>
+            <td><code>علی علوی صبح است</code></td>
+            <td><code>علی علوی صبح باشد</code></td>
+            <td>فعل باید از افعال مجاز باشد</td>
+        </tr>
+        <tr>
+            <td>۴</td>
+            <td><code>علی علوی رو صبح بذار</code></td>
+            <td><code>علی علوی صبح باشد</code></td>
+            <td>زبان محاوره‌ای پشتیبانی نمی‌شود</td>
+        </tr>
+        <tr>
+            <td>۵</td>
+            <td><code>علی علوی: صبح باشد</code></td>
+            <td><code>علی علوی صبح باشد</code></td>
+            <td>نشانه‌های اضافی حذف کنید</td>
+        </tr>
+        <tr>
+            <td>۶</td>
+            <td><code>شیفت‌های علی علوی صبح</code></td>
+            <td><code>علی علوی صبح باشد</code></td>
+            <td>ساختار جمله رعایت شود</td>
+        </tr>
+        <tr>
+            <td>۷</td>
+            <td><code>علی علوی بیشتر صبح</code></td>
+            <td><code>علی علوی صبح باشد</code></td>
+            <td>کلمات مبهم مثل «بیشتر» حذف شود</td>
+        </tr>
+        <tr>
+            <td>۸</td>
+            <td><code>علی علوی فاطمه قوامی صبح</code></td>
+            <td><code>علی علوی و فاطمه قوامی صبح باشند</code></td>
+            <td>جداکننده «و» فراموش نشود</td>
+        </tr>
+        <tr>
+            <td>۹</td>
+            <td><code>علی علوی روزهای زوج صبح</code></td>
+            <td>—</td>
+            <td>این الگو فعلاً پشتیبانی نمی‌شود</td>
+        </tr>
+        <tr>
+            <td>۱۰</td>
+            <td><code>پرستاران با تجربه شب</code></td>
+            <td>—</td>
+            <td>فیلتر بر اساس ویژگی پشتیبانی نمی‌شود</td>
+        </tr>
+    </tbody>
+</table>
+
+<!-- ============================================== -->
+<h2>۵. پرامپت‌های ترکیبی</h2>
+
+<div class="section-box">
+    <div class="section-title">🎯 ترکیب چند قانون در یک پرامپت</div>
+    
+    <p>می‌توانید چندین درخواست را در یک پرامپت بنویسید. کافیست با <strong>ویرگول</strong> یا <strong>و</strong> جدا کنید:</p>
+    
+    <h4>✅ مثال ۱: ترکیب سه قانونی</h4>
+    <div class="prompt valid">علی علوی صبح باشد، فاطمه قوامی شب باشد، حداکثر 2 شب متوالی</div>
+    
+    <h4>✅ مثال ۲: ترکیب با «و»</h4>
+    <div class="prompt valid">علی علوی از روز 5 تا 10 صبح باشد و فاطمه قوامی از روز 15 تا 20 شب باشد</div>
+    
+    <h4>✅ مثال ۳: ترکیب کامل</h4>
+    <div class="prompt valid">همه صبح باشند به جز علی علوی، حداکثر 3 شب متوالی، حداقل 20 شیفت</div>
+    
+    <div class="result-box">
+        <strong>💡 نکته:</strong> سیستم پرامپت را به جملات جدا تقسیم می‌کند و هر جمله را جداگانه تفسیر می‌کند.
+    </div>
+</div>
+
+<!-- ============================================== -->
+<h2>۶. راهنمای سریع</h2>
+
+<div class="success-box">
+    <strong>🚀 راهنمای سریع — این کارت را همیشه همراه داشته باشید</strong>
+    
+    <table style="margin-top: 15px;">
+        <thead>
+            <tr>
+                <th style="width: 40%;">می‌خواهم...</th>
+                <th>بنویسید:</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <td>برای یک پرستار شیفت مشخص کنم</td>
+                <td><code>[نام] [شیفت] باشد</code></td>
+            </tr>
+            <tr>
+                <td>برای چند پرستار مشخص کنم</td>
+                <td><code>[نام۱] و [نام۲] [شیفت] باشند</code></td>
+            </tr>
+            <tr>
+                <td>برای بازه روز خاصی مشخص کنم</td>
+                <td><code>[نام] از روز X تا Y [شیفت] باشد</code></td>
+            </tr>
+            <tr>
+                <td>مرخصی ثبت کنم</td>
+                <td><code>[نام] از روز X تا Y مرخصی است</code></td>
+            </tr>
+            <tr>
+                <td>برای همه اعمال کنم</td>
+                <td><code>همه [شیفت] باشند</code></td>
+            </tr>
+            <tr>
+                <td>برای همه به جز یک نفر</td>
+                <td><code>همه [شیفت] باشند به جز [نام]</code></td>
+            </tr>
+            <tr>
+                <td>حداکثر شب متوالی تعیین کنم</td>
+                <td><code>حداکثر X شب متوالی</code></td>
+            </tr>
+            <tr>
+                <td>حداقل شیفت تعیین کنم</td>
+                <td><code>حداقل X شیفت</code></td>
+            </tr>
+        </tbody>
+    </table>
+</div>
+
+<!-- ============================================== -->
+<div class="section-box" style="background: linear-gradient(135deg, #fef3c7 0%, #fde68a 100%); border-color: #fbbf24;">
+    <div class="section-title" style="color: #92400e; border-bottom-color: #f59e0b;">
+        💡 نکات طلایی
+    </div>
+    
+    <ol>
+        <li><strong>یک پرامپت — یک تمرکز:</strong> سعی کنید هر پرامپت را روی یک موضوع متمرکز کنید.</li>
+        <li><strong>نام‌ها را دقیق بنویسید:</strong> حتی یک اشتباه کوچک، سیستم را ناتوان می‌کند.</li>
+        <li><strong>ترتیب را حفظ کنید:</strong> همیشه نام اول، سپس بازه، سپس شیفت.</li>
+        <li><strong>نشانه‌های اضافی نگذارید:</strong> دو نقطه، پرانتز، علامت سوال، نقطه اضافی.</li>
+        <li><strong>از کلمات مبهم پرهیز کنید:</strong> «بیشتر»، «شاید»، «اگر ممکن است».</li>
+        <li><strong>پس از تولید، برنامه را بررسی کنید:</strong> گزارش اعتبارسنجی را ببینید.</li>
+    </ol>
+</div>
+
+<!-- ============================================== -->
+<div class="footer">
+    <p><strong>📚 راهنمای پرامپت‌های هوش مصنوعی</strong></p>
+    <p>سیستم مدیریت شیفت پرستاری — نسخه ۱.۰</p>
+    <p>تهیه شده برای: سرپرستاران و مدیران بخش‌های بیمارستانی</p>
+    <p style="margin-top: 15px; color: #9ca3af;">
+        © 1405 — تمامی حقوق محفوظ است
+    </p>
+</div>
+
+</body>
+</html>

@@ -1,0 +1,560 @@
+/* ======================================================== */
+/* Design System - Light & Vibrant                          */
+/* ======================================================== */
+
+/* ======================================================== */
+/* ✅ فونت‌های سفارشی                                      */
+/* ======================================================== */
+
+/* ✅ وزیرمتن — وزن Regular */
+@font-face {
+    font-family: 'Vazirmatn';
+    src: url('../assets/fonts/vazirmatn/Vazirmatn-Regular.woff2') format('woff2');
+    font-weight: 400;
+    font-style: normal;
+    font-display: swap;
+}
+
+/* ✅ وزیرمتن — وزن Medium */
+@font-face {
+    font-family: 'Vazirmatn';
+    src: url('../assets/fonts/vazirmatn/Vazirmatn-Medium.woff2') format('woff2');
+    font-weight: 500;
+    font-style: normal;
+    font-display: swap;
+}
+
+/* ✅ وزیرمتن — وزن Bold */
+@font-face {
+    font-family: 'Vazirmatn';
+    src: url('../assets/fonts/vazirmatn/Vazirmatn-Bold.woff2') format('woff2');
+    font-weight: 700;
+    font-style: normal;
+    font-display: swap;
+}
+
+/* ✅ وزیرمتن — وزن Black */
+@font-face {
+    font-family: 'Vazirmatn';
+    src: url('../assets/fonts/vazirmatn/Vazirmatn-Black.woff2') format('woff2');
+    font-weight: 900;
+    font-style: normal;
+    font-display: swap;
+}
+
+/* ✅ یکان — وزن Regular */
+@font-face {
+    font-family: 'IranYekan';
+    src: url('../assets/fonts/iranyekan/Yekan.woff2') format('woff2');
+    font-weight: 400;
+    font-style: normal;
+    font-display: swap;
+}
+
+
+:root {
+    /* ✅ رنگ‌های پایه */
+    --color-bg: #F9FAFB;
+    --color-surface: #FFFFFF;
+    --color-elevated: #F3F4F6;
+    --color-text: #1F2937;
+    --color-text-muted: #6B7280;
+    --color-border: #E5E7EB;
+    --color-border-strong: #D1D5DB;
+
+    /* ✅ رنگ‌های سرپرستار (آبی) */
+    --head-bg: #EFF6FF;
+    --head-primary: #3B82F6;
+    --head-secondary: #60A5FA;
+    --head-dark: #1E40AF;
+    --head-light: #DBEAFE;
+    --head-gradient: linear-gradient(135deg, #3B82F6 0%, #2563EB 100%);
+
+    /* ✅ رنگ‌های سوپروایزر (نارنجی) */
+    --supervisor-bg: #FFF7ED;
+    --supervisor-primary: #F97316;
+    --supervisor-secondary: #FB923C;
+    --supervisor-dark: #C2410C;
+    --supervisor-light: #FFEDD5;
+    --supervisor-gradient: linear-gradient(135deg, #F97316 0%, #EA580C 100%);
+
+    /* ✅ رنگ‌های مترون (سرمه‌ای) */
+    --matron-bg: #F0F4FF;
+    --matron-primary: #1E3A8A;
+    --matron-secondary: #2563EB;
+    --matron-dark: #1E2A5A;
+    --matron-light: #DBEAFE;
+    --matron-gradient: linear-gradient(135deg, #1E3A8A 0%, #1E40AF 100%);
+
+    /* ✅ رنگ‌های وضعیت */
+    --color-success: #10B981;
+    --color-warning: #F59E0B;
+    --color-danger: #EF4444;
+    --color-info: #3B82F6;
+    --color-locked: #10B981;
+    --color-returned: #F59E0B;
+
+    /* ======================================================== */
+    /* ✅ Typography — وزیرمتن برای بدنه، یکان برای هدر/دکمه */
+    /* ======================================================== */
+    --font-family: 'Vazirmatn', 'Vazir', 'Tahoma', sans-serif;
+    --font-header: 'IranYekan', 'Yekan', 'Vazirmatn', 'Tahoma', sans-serif;
+
+    --font-size-xs: 10px;
+    --font-size-sm: 12px;
+    --font-size-base: 14px;
+    --font-size-lg: 18px;
+    --font-size-xl: 24px;
+    --font-size-2xl: 32px;
+    --font-size-hero: 48px;
+
+    --font-weight-normal: 400;
+    --font-weight-medium: 500;
+    --font-weight-bold: 700;
+    --font-weight-black: 800;
+
+    --line-height-tight: 1.25;
+    --line-height-normal: 1.5;
+    --line-height-relaxed: 1.75;
+
+    /* ✅ Spacing */
+    --space-1: 4px;
+    --space-2: 8px;
+    --space-3: 12px;
+    --space-4: 16px;
+    --space-5: 20px;
+    --space-6: 24px;
+    --space-8: 32px;
+    --space-10: 40px;
+    --space-15: 60px;
+
+    /* ✅ Radius */
+    --radius-sm: 6px;
+    --radius-md: 10px;
+    --radius-lg: 16px;
+    --radius-xl: 24px;
+    --radius-full: 9999px;
+
+    /* ✅ Shadows (نرم و لطیف) */
+    --shadow-sm: 0 1px 3px rgba(0, 0, 0, 0.05);
+    --shadow-md: 0 4px 6px rgba(0, 0, 0, 0.07);
+    --shadow-lg: 0 10px 25px rgba(0, 0, 0, 0.1);
+    --shadow-xl: 0 20px 40px rgba(0, 0, 0, 0.15);
+
+    /* ✅ Transitions */
+    --transition-fast: 0.15s ease;
+    --transition-base: 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    --transition-bounce: 0.4s cubic-bezier(0.68, -0.55, 0.265, 1.55);
+
+    --container-max: 100%;
+    --container-padding: 16px;
+
+    /* ✅ Z-index */
+    --z-nav: 1000;
+    --z-overlay: 9999;
+}
+
+/* ======================================================== */
+/* Reset & Base                                             */
+/* ======================================================== */
+
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+body {
+    font-family: var(--font-family);
+    background: var(--color-bg);
+    color: var(--color-text);
+    font-size: var(--font-size-base);
+    line-height: var(--line-height-normal);
+    direction: rtl;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+}
+
+/* ======================================================== */
+/* Buttons - فانتزی با گرادیانت                              */
+/* ======================================================== */
+
+.btn {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: var(--space-2);
+    padding: 12px 24px;
+    font-family: var(--font-header);   /* ✅ یکان */
+    font-size: var(--font-size-sm);
+    font-weight: 600;
+    border: none;
+    border-radius: var(--radius-md);
+    cursor: pointer;
+    transition: all var(--transition-base);
+    text-decoration: none;
+    white-space: nowrap;
+    position: relative;
+    overflow: hidden;
+}
+
+.btn::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: -100%;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.2), transparent);
+    transition: left 0.5s;
+}
+
+.btn:hover::before {
+    left: 100%;
+}
+
+.btn:hover:not(:disabled) {
+    transform: translateY(-2px);
+    box-shadow: var(--shadow-lg);
+}
+
+.btn:active:not(:disabled) {
+    transform: translateY(0);
+}
+
+.btn:disabled {
+    opacity: 0.5;
+    cursor: not-allowed;
+    transform: none !important;
+}
+
+.btn-primary {
+    background: var(--head-gradient);
+    color: white;
+    box-shadow: 0 4px 12px rgba(59, 130, 246, 0.3);
+}
+
+.btn-secondary {
+    background: var(--color-surface);
+    color: var(--color-text);
+    border: 2px solid var(--color-border);
+}
+
+.btn-secondary:hover:not(:disabled) {
+    border-color: var(--head-primary);
+    color: var(--head-primary);
+}
+
+.btn-success {
+    background: linear-gradient(135deg, #10B981 0%, #059669 100%);
+    color: white;
+    box-shadow: 0 4px 12px rgba(16, 185, 129, 0.3);
+}
+
+.btn-danger {
+    background: linear-gradient(135deg, #EF4444 0%, #DC2626 100%);
+    color: white;
+    box-shadow: 0 4px 12px rgba(239, 68, 68, 0.3);
+}
+
+.btn-warning {
+    background: linear-gradient(135deg, #F59E0B 0%, #D97706 100%);
+    color: white;
+    box-shadow: 0 4px 12px rgba(245, 158, 11, 0.3);
+}
+
+.btn-info {
+    background: linear-gradient(135deg, #3B82F6 0%, #2563EB 100%);
+    color: white;
+    box-shadow: 0 4px 12px rgba(59, 130, 246, 0.3);
+}
+
+.btn-sm {
+    padding: 8px 16px;
+    font-size: var(--font-size-xs);
+}
+
+.btn-lg {
+    padding: 16px 32px;
+    font-size: var(--font-size-base);
+}
+
+/* ======================================================== */
+/* Cards                                                    */
+/* ======================================================== */
+
+.card {
+    background: var(--color-surface);
+    border: 1px solid var(--color-border);
+    border-radius: var(--radius-lg);
+    padding: var(--space-6);
+    box-shadow: var(--shadow-sm);
+    transition: all var(--transition-base);
+}
+
+.card:hover {
+    box-shadow: var(--shadow-md);
+}
+
+/* ======================================================== */
+/* Inputs                                                   */
+/* ======================================================== */
+
+.input, .select, .textarea, select {
+    width: 100%;
+    padding: 12px 16px;
+    background: var(--color-surface);
+    border: 2px solid var(--color-border);
+    border-radius: var(--radius-md);
+    color: var(--color-text);
+    font-family: var(--font-family);   /* ✅ وزیرمتن برای همه‌ی selectها */
+    font-size: var(--font-size-sm);
+    transition: all var(--transition-fast);
+}
+
+.input:focus, .select:focus, .textarea:focus {
+    outline: none;
+    border-color: var(--head-primary);
+    box-shadow: 0 0 0 3px rgba(59, 130, 246, 0.1);
+}
+
+.textarea {
+    resize: vertical;
+    min-height: 100px;
+}
+
+/* ======================================================== */
+/* Headers - قشنگ و مدرن                                    */
+/* ======================================================== */
+
+.page-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: var(--space-5) var(--space-6);
+    margin-bottom: var(--space-6);
+    background: var(--color-surface);
+    border-radius: var(--radius-lg);
+    box-shadow: var(--shadow-sm);
+    border: 1px solid var(--color-border);
+}
+
+.page-title {
+    font-size: var(--font-size-xl);
+    font-weight: var(--font-weight-black);
+    color: var(--color-text);
+    display: flex;
+    align-items: center;
+    gap: var(--space-3);
+    font-family: var(--font-header);   /* ✅ یکان */
+}
+
+.page-subtitle {
+    font-size: var(--font-size-sm);
+    color: var(--color-text-muted);
+    margin-top: var(--space-1);
+    font-family: var(--font-header);   /* ✅ یکان */
+}
+
+/* ✅ هدر مخصوص سرپرستار */
+.header-head {
+    background: var(--head-gradient);
+    color: white;
+    border: none;
+}
+
+.header-head .page-title,
+.header-head .page-subtitle {
+    color: white;
+}
+
+/* ✅ هدر مخصوص سوپروایزر */
+.header-supervisor {
+    background: var(--supervisor-gradient);
+    color: white;
+    border: none;
+}
+
+.header-supervisor .page-title,
+.header-supervisor .page-subtitle {
+    color: white;
+}
+
+/* ✅ هدر مخصوص مترون */
+.header-matron {
+    background: var(--matron-gradient);
+    color: white;
+    border: none;
+}
+
+.header-matron .page-title,
+.header-matron .page-subtitle {
+    color: white;
+}
+
+/* ======================================================== */
+/* Tables                                                   */
+/* ======================================================== */
+
+.table-container {
+    overflow-x: auto;
+    border: 1px solid var(--color-border);
+    border-radius: var(--radius-md);
+    background: var(--color-surface);
+    box-shadow: var(--shadow-sm);
+}
+
+.table {
+    width: 100%;
+    border-collapse: collapse;
+    font-size: var(--font-size-sm);
+}
+
+.table thead th {
+    background: var(--color-elevated);
+    color: var(--color-text);
+    padding: var(--space-3);
+    border: 1px solid var(--color-border);
+    font-weight: var(--font-weight-bold);
+    text-align: center;
+    white-space: nowrap;
+    font-family: var(--font-header);   /* ✅ یکان */
+}
+
+.table tbody td {
+    padding: var(--space-2);
+    border: 1px solid var(--color-border);
+    text-align: center;
+    color: var(--color-text);
+    font-family: var(--font-family);   /* ✅ وزیرمتن */
+}
+
+.table tbody tr:hover {
+    background: var(--color-elevated);
+}
+
+/* ======================================================== */
+/* Status Badges                                            */
+/* ======================================================== */
+
+.badge {
+    display: inline-flex;
+    align-items: center;
+    gap: var(--space-1);
+    padding: 6px 14px;
+    border-radius: var(--radius-full);
+    font-size: var(--font-size-xs);
+    font-weight: var(--font-weight-bold);
+}
+
+.badge-draft {
+    background: rgba(245, 158, 11, 0.1);
+    color: #D97706;
+}
+
+.badge-pending {
+    background: rgba(59, 130, 246, 0.1);
+    color: #2563EB;
+}
+
+.badge-locked {
+    background: rgba(16, 185, 129, 0.1);
+    color: #059669;
+}
+
+.badge-returned {
+    background: rgba(249, 115, 22, 0.1);
+    color: #EA580C;
+}
+
+/* ======================================================== */
+/* Layout Helpers                                           */
+/* ======================================================== */
+
+.container {
+    max-width: var(--container-max);
+    margin: 0 auto;
+    padding: 0 var(--container-padding);
+}
+
+.flex { display: flex; }
+.flex-col { flex-direction: column; }
+.flex-center { align-items: center; justify-content: center; }
+.flex-between { align-items: center; justify-content: space-between; }
+.gap-2 { gap: var(--space-2); }
+.gap-4 { gap: var(--space-4); }
+.gap-6 { gap: var(--space-6); }
+
+.text-center { text-align: center; }
+.text-right { text-align: right; }
+.text-muted { color: var(--color-text-muted); }
+.text-bold { font-weight: var(--font-weight-bold); }
+
+.mt-2 { margin-top: var(--space-2); }
+.mt-4 { margin-top: var(--space-4); }
+.mt-6 { margin-top: var(--space-6); }
+.mb-2 { margin-bottom: var(--space-2); }
+.mb-4 { margin-bottom: var(--space-4); }
+.mb-6 { margin-bottom: var(--space-6); }
+
+/* ======================================================== */
+/* Animations                                               */
+/* ======================================================== */
+
+@keyframes fadeIn {
+    from { opacity: 0; transform: translateY(-10px); }
+    to { opacity: 1; transform: translateY(0); }
+}
+
+@keyframes slideIn {
+    from { opacity: 0; transform: translateX(-20px); }
+    to { opacity: 1; transform: translateX(0); }
+}
+
+@keyframes pulse {
+    0%, 100% { transform: scale(1); }
+    50% { transform: scale(1.05); }
+}
+
+.animate-fade-in {
+    animation: fadeIn var(--transition-base);
+}
+
+.animate-slide-in {
+    animation: slideIn var(--transition-base);
+}
+
+.animate-pulse {
+    animation: pulse 2s ease-in-out infinite;
+}
+
+/* ✅ دکمه اصلی (آبی) */
+.btn.btn-primary {
+    background: linear-gradient(135deg, #3B82F6 0%, #1E40AF 100%);
+    color: white;
+}
+
+/* ✅ دکمه موفق (سبز) */
+.btn.btn-success {
+    background: linear-gradient(135deg, #10B981 0%, #059669 100%);
+    color: white;
+}
+
+/* ✅ دکمه خطر (قرمز) */
+.btn.btn-danger {
+    background: linear-gradient(135deg, #EF4444 0%, #DC2626 100%);
+    color: white;
+}
+
+/* ✅ دکمه هشدار (زرد) */
+.btn.btn-warning {
+    background: linear-gradient(135deg, #F59E0B 0%, #D97706 100%);
+    color: white;
+}
+
+/* ✅ دکمه ثانویه (خاکستری) */
+.btn.btn-secondary {
+    background: white;
+    color: #1F2937;
+    border: 2px solid #E5E7EB;
+}
