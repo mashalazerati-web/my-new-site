@@ -10,6 +10,10 @@ permissions:
   pages: write
   id-token: write
 
+concurrency:
+  group: "pages"
+  cancel-in-progress: false
+
 jobs:
   deploy:
     environment:
@@ -26,8 +30,7 @@ jobs:
       - name: Upload artifact
         uses: actions/upload-pages-artifact@v3
         with:
-          # اینجا به گیت‌هاب می‌گوییم فایل‌های سایت را از کدام پوشه بردارد
-          path: './frontend/public' 
+          path: './docs' 
 
       - name: Deploy to GitHub Pages
         id: deployment
